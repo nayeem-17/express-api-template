@@ -4,13 +4,13 @@ const { isPasswordValid } = require('./authServices');
 module.exports.login = async (req, res, next) => {
     const { username, password } = req.body;
     // Fetching userData from database 
+    const userInfo;
 
-
-    const hashPass = data[0].password;
+    const hashPass = userInfo[0].password;
 
     //  Add more info if needed
 
-    const { userId, email } = data[0];
+    const { userId, email } = userInfo[0];
 
     if (hashPass && isPasswordValid(hashPass, password)) {
         req.body = {
@@ -41,6 +41,6 @@ module.exports.isValidJWTToken = (req, res, next) => {
             return res.status(403).send();
         }
     } else {
-        return res.status(401).send();
+        return res.status(401).send({ error: "Please attach access token in headers." });
     }
 }
