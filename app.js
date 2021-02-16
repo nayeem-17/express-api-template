@@ -1,8 +1,9 @@
 const createError = require('http-errors');
 const express = require('express');
 const mongoose = require('mongoose')
-const swaggerJsdoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
+const swaggerUi = require('swagger-ui-express');
+const YAML = require('yamljs');
+const swaggerDocument = YAML.load('./swagger.yaml');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const helmet = require('helmet')
@@ -37,31 +38,7 @@ mongoose
     console.log(e)
   })
 
-// configuration of swagger ui
-const options = {
-  swaggerDefinition: {
-    openapi: "3.0.1",
-    info: {
-      title: "Backend API",
-      description: "THis is a simple api created by using Express framework .Swagger is used auto-documetation.",
-      version: "1.0.0",
-      servers: [`http://localhost:${process.env.PORT}`],
-      contact: {
-        name: "dude"
-      }
-    },
-  },
-  apis: [
-    "*.js",
-    "./models/*.js",
-    "./router/*js"
-  ]
-
-};
-const swaggerDocs = swaggerJsdoc(options)
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocs))
-
-
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter)

@@ -1,0 +1,22 @@
+openapi: "3.0.2"
+info:
+  title: "Backend API"
+  description: "This api is created by using Express framework .Swagger is used for auto-documetation."
+  version: "1.0.0"
+  contact:
+    name: "naim"
+servers:
+  - url: http://localhost:8080
+paths:
+  /:
+    get:
+      responses:
+        "200":
+          description: ok
+
+components:
+  securitySchemes:
+    bearAuth: # arbitrary name for the security scheme
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

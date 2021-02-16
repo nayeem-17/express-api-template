@@ -4,7 +4,7 @@ const { isPasswordValid } = require('./authServices');
 module.exports.login = async (req, res, next) => {
     const { username, password } = req.body;
     // Fetching userData from database 
-    const userInfo;
+    const userInfo = "";
 
     const hashPass = userInfo[0].password;
 
