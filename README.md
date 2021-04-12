@@ -12,6 +12,10 @@ MONGO_LOCAL="The local mongo database url"
 ```
 Then run this command in your terminal or cmd, `npm start` to start the app. Or you can run `npm run dev` to start the app in development mode. Every time you save any file, the server will restart.
 
+### Adding Project Name 
+
+Replace `express-mongo-template` with your project name in [package.json](package.json) file & [bin/www](bin/www) file .
+
 ###  Using Docker-compose
 
 At first, you have to create a `.env` file as explained [here](#using-npm)      
@@ -38,7 +42,7 @@ Here, I used Mongodb as a database. Mongodb is a NoSQL database.
 **Routes**: Here, the router files will be stored. In a router file, a single express router will be declared. Then the express app will use the router in `app.js` file.  
 
 **Services**: Here, various service file is stored. The [cache.js](services/cache.js) is for handling caching. The [rateLimiter.js](services/rateLimiter.js) is for limiting a request rate for a user. Other services, such as sending email, logging data can be stored here.      
-- `sending email` : To send email just call `sendMail = (RECEIVER_EMAIL, subject, body, links)` function. This function use [nodemailer](https://www.npmjs.com/package/nodemailer) to send the function. You can use your gmail account to send an email. First, you have to enable `Less secure app access` of your google account from settings. Then you've to add your account credentials in `.env` file.
+- `Sending email` : To send email just call `sendMail = (RECEIVER_EMAIL, subject, body, links)` function. This function use [nodemailer](https://www.npmjs.com/package/nodemailer) to send the function. You can use your gmail account to send an email. First, you have to enable `Less secure app access` of your google account from settings. Then you've to add your account credentials in `.env` file.
     ```bash
     EMAIL_ID=YOUR_GMAIL_ACCOUNT
     EMAIL_PASS=PASSWORD
