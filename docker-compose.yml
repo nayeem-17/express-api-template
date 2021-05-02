@@ -1,24 +1,26 @@
-version: "3.1"
+version: "3"
 services:
-  mongo:
-    image: mongo
-    restart: always
-    expose:
-      - 27071
-      volumes:
-        - ./db/:/data/db
-      restart: unless-stopped
-
   node_app:
     build: .
-    ports:
-      - 80:8080
-    external_links:
-      - "mongo"
+    depends_on:
+      - postgres
     environment:
-      - MONGO_LOCAL=mongodb://mongo:27017
-      - PORT=8080
+      DATABASE_URL: postgres://user:pass@postgres:5432/db
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app/
+      - /app/node_modules
+
+  postgres:
+    image: postgres:10.4
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: db
       volumes:
-        - .:/app/
-        - /app/node_modules
-      restart: unless-stopped
+        - ./postgres-data:/var/lib/postgresql/data

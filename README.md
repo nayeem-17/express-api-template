@@ -1,20 +1,21 @@
 # This is a template for my backend projects
 ## Running this on your machine
 
+This branch is for SQL database ( here , i used postgres) without ORM
+
 ### Using npm 
 
 To use this template, first, you have to create a `.env` file and add the environment variables. Here's the example `.env` file.
 ```bash
 PORT=8080
-MONGO_CLOUD="The mongo atlas url"
 NODE_ENV=PROD
-MONGO_LOCAL="The local mongo database url"
+DATABASE_URL='YOUR Postgres DB LINK'
 ```
 Then run this command in your terminal or cmd, `npm start` to start the app. Or you can run `npm run dev` to start the app in development mode. Every time you save any file, the server will restart.
 
 ### Adding Project Name 
 
-Replace `express-mongo-template` with your project name in [package.json](package.json) file & [bin/www](bin/www) file .
+Replace `express-template` with your project name in [package.json](package.json) file & [bin/www](bin/www) file .
 
 ###  Using Docker-compose
 
@@ -25,8 +26,6 @@ To run this template using docker-compose. Just run this command.
 docker-compose up
 ```
 To know more about docker, see [this] (https://github.com/nayeem-17/DevOps-writeups/blob/master/Docker/README.md)
-****
-Here, I used Mongodb as a database. Mongodb is a NoSQL database.   
 ****
 ## The architecture of this template
 * authentication
