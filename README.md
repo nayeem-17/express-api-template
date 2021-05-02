@@ -1,4 +1,8 @@
 # This is a template for my backend projects
+****
+### Here, I used Mongodb as a database. Mongodb is a NoSQL database.  
+### For SQL (postgres) without ORM , check this  [branch](https://github.com/nayeem-17/express-mongo-api-template/tree/sql-without-ORM) 
+****
 ## Running this on your machine
 
 ### Using npm 
@@ -14,7 +18,7 @@ Then run this command in your terminal or cmd, `npm start` to start the app. Or 
 
 ### Adding Project Name 
 
-Replace `express-mongo-template` with your project name in [package.json](package.json) file & [bin/www](bin/www) file .
+Replace `express-template` with your project name in [package.json](package.json) file & [bin/www](bin/www) file .
 
 ###  Using Docker-compose
 
@@ -25,8 +29,6 @@ To run this template using docker-compose. Just run this command.
 docker-compose up
 ```
 To know more about docker, see [this] (https://github.com/nayeem-17/DevOps-writeups/blob/master/Docker/README.md)
-****
-Here, I used Mongodb as a database. Mongodb is a NoSQL database.   
 ****
 ## The architecture of this template
 * authentication
