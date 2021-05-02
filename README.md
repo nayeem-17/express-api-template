@@ -28,7 +28,7 @@ To run this template using docker-compose. Just run this command.
 ```bash
 docker-compose up
 ```
-To know more about docker, see [this] (https://github.com/nayeem-17/DevOps-writeups/blob/master/Docker/README.md)
+To know more about docker, see [this](https://github.com/nayeem-17/DevOps-writeups/blob/master/Docker/README.md)
 ****
 ## The architecture of this template
 * authentication
