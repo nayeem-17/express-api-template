@@ -32,7 +32,7 @@ exports.sendMail = (RECEIVER_EMAIL, subject, body, links) => {
         from: SENDER_EMAIL,
         to: RECEIVER_EMAIL,
         subject: subject,
-        text: body
+        html: body
     }, (err, info) => {
         if (info)
             console.log(info);

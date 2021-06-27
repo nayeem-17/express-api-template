@@ -4,7 +4,8 @@
     "private": true,
     "scripts": {
         "start": "node ./bin/www",
-        "dev": "node ./bin/www"
+        "dev": "node ./bin/www",
+        "test": "mocha"
     },
     "dependencies": {
         "body-parser": "^1.19.0",
@@ -23,5 +24,10 @@
         "swagger-jsdoc": "^6.0.2",
         "swagger-ui-express": "^4.1.6",
         "yamljs": "^0.3.0"
+    },
+    "devDependencies": {
+        "chai": "^4.3.4",
+        "chai-http": "^4.3.0",
+        "mocha": "^9.0.1"
     }
 }

@@ -2,7 +2,7 @@ const { sendMail } = require("./email");
 
 exports.sendVerificationMail = (verification_code, receiver_email) => {
 
-    const email_body = `Dear user, please verify your account. Your verification code is  ${verification_code}`;
+    const email_body = `Dear user, please verify your account. Your verification code is <b> ${verification_code} </b> `;
     try {
         sendMail(receiver_email, 'Verification for Selfish account', email_body);
         return true;
