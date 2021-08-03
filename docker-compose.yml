@@ -5,9 +5,9 @@ services:
     restart: always
     expose:
       - 27071
-      volumes:
-        - ./db/:/data/db
-      restart: unless-stopped
+    volumes:
+      - ./db/:/data/db
+    restart: unless-stopped
 
   node_app:
     build: .
@@ -18,7 +18,7 @@ services:
     environment:
       - MONGO_LOCAL=mongodb://mongo:27017
       - PORT=8080
-      volumes:
-        - .:/app/
-        - /app/node_modules
-      restart: unless-stopped
+    volumes:
+      - .:/app/
+      - /app/node_modules
+    restart: unless-stopped
