@@ -2,6 +2,7 @@
 ****
 ### Here, I used Mongodb as a database. Mongodb is a NoSQL database.  
 ### For SQL (postgres) without ORM , check this  [branch](https://github.com/nayeem-17/express-mongo-api-template/tree/sql-without-ORM) 
+### For serverless architecture, check this  [branch](https://github.com/nayeem-17/express-api-template/tree/serverless)
 ****
 ## Running this on your machine
 
