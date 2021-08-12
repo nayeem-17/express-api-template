@@ -3,11 +3,11 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "node ./bin/www",
-        "dev": "node ./bin/www",
-        "test": "mocha"
+        "start": "sls deploy",
+        "dev": "sls offline start --skipCacheInvalidation"
     },
     "dependencies": {
+        "aws-sdk": "^2.965.0",
         "body-parser": "^1.19.0",
         "cookie-parser": "~1.4.4",
         "debug": "~2.6.9",
@@ -16,6 +16,8 @@
         "express-rate-limit": "^5.2.3",
         "helmet": "^4.4.1",
         "http-errors": "~1.6.3",
+        "serverless-http": "^2.7.0",
+        "serverless-offline": "^8.0.0",
         "jsonwebtoken": "^8.5.1",
         "mongoose": "^5.10.13",
         "morgan": "~1.9.1",

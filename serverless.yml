@@ -1,0 +1,21 @@
+service: SERVICE_NAME
+useDotenv: true
+frameworkVersion: "2"
+custom:
+  tableName: "TABLE_NAME"
+# The `provider` block defines where your service will be deployed
+provider:
+  name: aws
+  runtime: nodejs12.x
+  stage: dev
+  region: us-east-2
+  lambdaHashingVersion: 20201221
+
+functions:
+  app:
+    handler: app.handler
+    events:
+      - http: get /hello
+
+plugins:
+  - serverless-offline

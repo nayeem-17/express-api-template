@@ -1,7 +1,38 @@
 # This is a template for my backend projects
 ****
-### Here, I used Mongodb as a database. Mongodb is a NoSQL database.  
-### For SQL (postgres) without ORM , check this  [branch](https://github.com/nayeem-17/express-mongo-api-template/tree/sql-without-ORM) 
+### Here, This is the serverless version of this template.   
+
+To use this template, you don't have to change the way you make nodejs API. You just have to write the new endpoints in `serverless.yml` file.
+For example, for a simple crud api, you can write the following code in `serverless.yml`:
+```yml
+functions:
+  app:
+    handler: app.handler
+    events:
+      - http: ANY /
+  getUser:
+    handler: app.handler
+    events:
+      - http: "GET /user/get/{proxy+}"
+  createUser:
+    handler: app.handler
+    events:
+      - http: "POST /user/create"
+  updateUser:
+    handler: app.handler
+    events:
+      - http: "PUT /user/update/{proxy+}"
+  deleteUser:
+    handler: app.handler
+    events:
+      - http: "DELETE /user/delete/{proxy+}"
+
+```
+
+For the get, update, delete operation, you have to pass the `userId` as a parameter. `/{proxy+}` will take the userId as a parameter.
+ ### For SQL (postgres) without ORM , check this  [branch](https://github.com/nayeem-17/express-mongo-api-template/tree/sql-without-ORM) 
+  
+
 ****
 ## Running this on your machine
 
@@ -9,26 +40,15 @@
 
 To use this template, first, you have to create a `.env` file and add the environment variables. Here's the example `.env` file.
 ```bash
-PORT=8080
 MONGO_CLOUD="The mongo atlas url"
 NODE_ENV=PROD
-MONGO_LOCAL="The local mongo database url"
 ```
 Then run this command in your terminal or cmd, `npm start` to start the app. Or you can run `npm run dev` to start the app in development mode. Every time you save any file, the server will restart.
 
 ### Adding Project Name 
 
-Replace `express-template` with your project name in [package.json](package.json) file & [bin/www](bin/www) file .
+Replace `express-template` with your project name in [package.json](package.json) file .
 
-###  Using Docker-compose
-
-At first, you have to create a `.env` file as explained [here](#using-npm)      
-Then,   
-To run this template using docker-compose. Just run this command.   
-```bash
-docker-compose up
-```
-To know more about docker, see [this](https://github.com/nayeem-17/DevOps-writeups/blob/master/Docker/README.md)
 ****
 ## The architecture of this template
 * authentication
@@ -53,26 +73,7 @@ To know more about docker, see [this](https://github.com/nayeem-17/DevOps-writeu
 
 **Models**: Here, all the database models will be stored.
 
-## Documentation
 
-
-[swagger](https://swagger.io/) is a great tool for creating documentation for your api. You can either write swagger config file in `YAML` or `JSON`. Then `swagger-ui-express` will generate a beautiful user interface for your api. I've deployed this template on Heroku. You will find the UI of this api documentation [here](https://express-mongo-api-template.herokuapp.com/api-docs/). This UI if for this [swagger.yaml](swagger.yaml) config file.
-
-Here, I wrote a demo config file in `YAML` (YAML Ain't Markup Language). To load this file.
-```javascript
-const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
-const swaggerDocument = YAML.load('./swagger.yaml');
-```
-Then server the swaggerDocument in a route.
-
-```javascript
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
-```
-Now you can find your documentation UI in,  
-
-`http://localhost:{PORT}/api-docs` if you're running your server at localhost.  
-`https://your_server/api-docs`, if you've deployed else-where.
 
 ## Useful links:
 - [OpenAPI Specification](https://swagger.io/specification/)
