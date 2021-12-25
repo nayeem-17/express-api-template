@@ -27,5 +27,8 @@
         "!Select sequence",
         "!Split",
         "!Split sequence"
+    ],
+    "cSpell.words": [
+        "oracledb"
     ]
 }

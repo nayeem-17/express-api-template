@@ -1,11 +1,13 @@
-const { Repository } = require("./Repository");
+const { Repository } = require("../Repository");
 
 class IndexRepository extends Repository {
-    constructor() {
+    constructor () {
         super();
     }
-    show = async(param) => {
-        const query = "";
+    getManager = async (param) => {
+        const query = `SELECT manager_id, department_id, department_name
+        FROM departments
+        WHERE manager_id = :id`;
         const params = [param];
         const result = await this.query(query, params);
         return result;

@@ -76,5 +76,5 @@ Now you can find your documentation UI in,
 - [Style Guide for NodeJS](https://github.com/felixge/node-style-guide)
 - [Structuring Express Applications](https://softwareontheroad.com/ideal-nodejs-project-structure/?utm_source=github&utm_medium=readme#configs)
 - [Express Service Oriented Architecture](https://www.codementor.io/@evanbechtol/node-service-oriented-architecture-12vjt9zs9i)
-    
-
+- [Documentation for the Oracle Database Node.js Add-on](https://oracle.github.io/node-oracledb/doc/api.html#getstarted)
+- [Examples](https://github.com/oracle/node-oracledb)
