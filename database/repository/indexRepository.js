@@ -5,9 +5,7 @@ class IndexRepository extends Repository {
         super();
     }
     getManager = async (param) => {
-        const query = `SELECT manager_id, department_id, department_name
-        FROM departments
-        WHERE manager_id = :id`;
+        const query = `SELECT * from global_name`;
         const params = [param];
         const result = await this.query(query, params);
         return result;
