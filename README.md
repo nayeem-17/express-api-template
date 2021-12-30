@@ -7,9 +7,11 @@ This branch is for SQL database ( here , i used postgres) without ORM
 
 To use this template, first, you have to create a `.env` file and add the environment variables. Here's the example `.env` file.
 ```bash
-PORT=8080
-NODE_ENV=PROD
-DATABASE_URL='YOUR Postgres DB LINK'
+PORT=8000
+NODE_ENV=development
+DB_USER=naim
+DB_PASSWORD=naim
+DB_CONNECTION_STRING=localhost:1521/ORCLCDB.localdomain
 ```
 Then run this command in your terminal or cmd, `npm start` to start the app. Or you can run `npm run dev` to start the app in development mode. Every time you save any file, the server will restart.
 

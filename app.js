@@ -13,8 +13,8 @@ require('dotenv').config()
 const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const limiter = require('./services/rateLimiter');
+const { createConnection } = require('./database/connectDB');
 const app = express();
-
 app.use(logger('dev'));
 app.use(helmet());
 app.use(express.json());
@@ -23,6 +23,8 @@ app.use(cookieParser());
 app.use(cors())
 
 app.use(limiter)
+
+createConnection();
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
