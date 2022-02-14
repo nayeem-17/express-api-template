@@ -14,6 +14,7 @@ const indexRouter = require('./routes/index');
 const authRouter = require('./routes/auth');
 const limiter = require('./services/rateLimiter');
 const { createConnection } = require('./database/connectDB');
+const fileRouter = require('./routes/file');
 const app = express();
 app.use(logger('dev'));
 app.use(helmet());
@@ -25,6 +26,9 @@ app.use(cors())
 app.use(limiter)
 
 createConnection();
+
+app.use('/auto_uploads', express.static('uploads'));
+app.use('/file', fileRouter);
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 

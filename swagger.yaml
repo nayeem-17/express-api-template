@@ -6,14 +6,33 @@ info:
   contact:
     name: "naim"
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:8000
 paths:
   /:
     get:
       responses:
         "200":
           description: ok
-
+  /file/upload:
+    post:
+      responses:
+        "200":
+          description: ok
+        "500":
+          description: Internal Server Error
+        "401":
+          description: Unauthorized
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      tags:
+        - file
 components:
   securitySchemes:
     bearAuth: # arbitrary name for the security scheme

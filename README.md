@@ -73,6 +73,24 @@ Now you can find your documentation UI in,
 `http://localhost:{PORT}/api-docs` if you're running your server at localhost.  
 `https://your_server/api-docs`, if you've deployed else-where.
 
+### To use file uploader in your project
+First install this dependencies by running 
+```bash
+npm i multer uuid --save 
+```
+1. Copy [file.js](./routes/file.js) & [fileController.js](./controllers/fileController.js) to your project.
+2. Create a folder name `uploads` in your project.
+3. Import the router and add the following code in your `app.js` file.
+Now add this code in `app.js` file.
+```javascript
+app.use('/auto_uploads', express.static('uploads'));
+app.use('/file', fileRouter);
+```
+You can test it on Swagger. 
+1. clone this repo 
+2. run `npm install`
+3. Create a `.env` file and add the environment variables as described before.
+4. run `npm start` and goto `http://localhost:8000/api-docs` 
 ## Useful links:
 - [OpenAPI Specification](https://swagger.io/specification/)
 - [Style Guide for NodeJS](https://github.com/felixge/node-style-guide)
