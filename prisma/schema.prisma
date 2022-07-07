@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  user_id    Int      @id @default(autoincrement())
+  login      String?  @db.VarChar(512)
+  password   String?  @db.VarChar(512)
+  created_at DateTime @default(dbgenerated("timezone('UTC+6'::text, CURRENT_TIMESTAMP)")) @db.Timestamp(6)
+  updated_at DateTime @default(dbgenerated("timezone('UTC+6'::text, CURRENT_TIMESTAMP)")) @db.Timestamp(6)
+
+  @@map("users")
+}
