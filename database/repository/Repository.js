@@ -1,9 +1,11 @@
+const client = require("../connectDB");
+
 class Repository {
-    constructor() {
+    constructor () {
         // If anything needs be done here
     }
 
-    query = async function(query, params) {
+    query = async function (query, params) {
         try {
             const data = await client.query(query, params);
             return {
