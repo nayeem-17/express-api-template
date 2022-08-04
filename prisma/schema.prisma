@@ -16,3 +16,10 @@ model User {
 
   @@map("users")
 }
+
+model Job {
+  id       Int    @id @default(autoincrement())
+  title    String
+  location String
+  salary   String
+}

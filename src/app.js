@@ -1,9 +1,7 @@
 const createError = require('http-errors');
 const express = require('express');
 const mongoose = require('mongoose')
-const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
-const swaggerDocument = YAML.load('./swagger.yaml');
+
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const helmet = require('helmet')
@@ -38,7 +36,6 @@ mongoose
     console.log(e)
   })
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/', indexRouter);
 app.use('/auth', authRouter);

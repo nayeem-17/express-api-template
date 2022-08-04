@@ -7,7 +7,6 @@ services:
       - 27071
     volumes:
       - ./db/:/data/db
-    restart: unless-stopped
 
   node_app:
     build: .
