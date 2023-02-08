@@ -14,13 +14,13 @@ services:
       - .:/app/
       - /app/node_modules
 
-  postgres:
-    image: postgres:10.4
-    ports:
-      - 5432:5432
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: pass
-      POSTGRES_DB: db
-      volumes:
-        - ./postgres-data:/var/lib/postgresql/data
+  # postgres:
+  #   image: postgres:10.4
+  #   ports:
+  #     - 5432:5432
+  #   environment:
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: pass
+  #     POSTGRES_DB: db
+  #     volumes:
+  #       - ./postgres-data:/var/lib/postgresql/data

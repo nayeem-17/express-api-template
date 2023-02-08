@@ -1,13 +1,16 @@
-import IndexRepository from '../database/repository/indexRepository';
+import IndexRepository from '../repository/indexRepository';
 
-const indexRepository = new IndexRepository();
-const helloWorld = (req: any, res: any) => {
-  res.json({ title: 'Express' });
-};
-const getManager = async (req: any, res: any) => {
-  const { id } = req.params;
-  const result = await indexRepository.getManager(id);
-  res.json(result.data);
-};
-
-export { helloWorld, getManager };
+export class IndexController {
+  private repository: IndexRepository;
+  constructor() {
+    this.repository = new IndexRepository();
+  }
+  public helloWorld = (req: any, res: any) => {
+    res.json({ title: 'Express' });
+  };
+  public getManager = async (req: any, res: any) => {
+    // const { id } = req.params;
+    // const result = await this.repository.getManager(id);
+    // res.json(result.data);
+  };
+}

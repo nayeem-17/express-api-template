@@ -1,9 +1,22 @@
-import express from 'express';
-import getAccessToken from '../authentication/authentication.controllers';
-import { login } from '../authentication/authentication.middleware';
+import express, { Router } from 'express';
+import { AuthenticationController } from '../authentication/authentication.controllers';
+import { AuthenticationMiddleware } from '../authentication/authentication.middleware';
 
-const authRouter = express.Router();
-
-authRouter.post('/token', login, getAccessToken);
-
-export default authRouter;
+export class AuthRouter {
+  private authRouter: Router;
+  private authController: AuthenticationController;
+  private authMiddleware: AuthenticationMiddleware;
+  constructor() {
+    this.authRouter = express.Router();
+    this.authMiddleware = new AuthenticationMiddleware();
+    this.authController = new AuthenticationController();
+  }
+  public routes(): Router {
+    this.authRouter.post(
+      '/token',
+      this.authMiddleware.login,
+      this.authController.getAccessToken,
+    );
+    return this.authRouter;
+  }
+}

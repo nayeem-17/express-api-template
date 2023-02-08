@@ -10,40 +10,61 @@ import helmet from 'helmet';
 const swaggerDocument = YAML.load('./swagger.yaml');
 
 import * as dotenv from 'dotenv';
-dotenv.config();
 
 import limiter from './services/rateLimiter';
-import indexRouter from './routes/index.route';
-import authRouter from './routes/auth.route';
+import { IndexRouter } from './routes/index.route';
+import { AuthRouter } from './routes/auth.route';
 
-const app = express();
+class App {
+  public getApp() {
+    return this.app;
+  }
+  private app: express.Application;
+  private indexRouter: IndexRouter;
+  private authRouter: AuthRouter;
+  constructor() {
+    this.app = express();
+    this.authRouter = new AuthRouter();
+    this.indexRouter = new IndexRouter();
+    this.setConfig();
+    this.setRoutes();
+  }
+  private setConfig() {
+    dotenv.config();
+    this.app.use(morgan('dev'));
+    this.app.use(helmet());
+    this.app.use(express.json());
+    this.app.use(express.urlencoded({ extended: false }));
+    this.app.use(cookieParser());
+    this.app.use(cors());
 
-app.use(morgan('dev'));
-app.use(helmet());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(cors());
+    this.app.use(limiter);
+  }
+  private setRoutes() {
+    this.app.use(
+      '/api-docs',
+      swaggerUi.serve,
+      swaggerUi.setup(swaggerDocument),
+    );
 
-app.use(limiter);
+    this.app.use('/', this.indexRouter.routes());
+    this.app.use('/auth', this.authRouter.routes());
+    // catch 404 and forward to error handler
+    this.app.use(function (req: Request, res: Response, next: NextFunction) {
+      if (req.originalUrl === '/favicon.ico') {
+        res.status(204).json({ nope: true });
+      }
+      next(createError(404));
+    });
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    // error handler
+    this.app.use(function (err: HttpError, req: Request, res: Response) {
+      // set locals, only providing error in development
+      res.locals.message = err.message;
+      res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-app.use('/', indexRouter);
-app.use('/auth', authRouter);
-
-// catch 404 and forward to error handler
-app.use(function (req: Request, res: Response, next: NextFunction) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function (err: HttpError, req: Request, res: Response) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  res.status(err.status || 500);
-});
-
-export default app;
+      res.status(err.status || 500);
+    });
+  }
+}
+export default new App().getApp();

@@ -1,7 +1,12 @@
 import rateLimit from 'express-rate-limit';
-const limiter = rateLimit({
-  windowMs: 30 * 1000,
-  max: 45,
-});
+class RateLimiter {
+  public limiter;
+  constructor() {
+    this.limiter = rateLimit({
+      windowMs: 30 * 1000,
+      max: 45,
+    });
+  }
+}
 
-export default limiter;
+export default new RateLimiter().limiter;
