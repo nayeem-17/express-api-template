@@ -1,5 +1,5 @@
 import nodemailer, { SentMessageInfo } from 'nodemailer';
-import { MailConfig } from './mailconfig';
+import { MailConfig } from '../../model/mail.config';
 class Mailer {
   public config: MailConfig;
 

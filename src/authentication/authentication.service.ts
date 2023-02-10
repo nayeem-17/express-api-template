@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 export class AuthenticationService {
-  public makeHash = (password: string) => {
+  public static makeHash = (password: string) => {
     const salt = crypto.randomBytes(16).toString('base64');
     const hash = crypto
       .createHmac('sha512', salt)
@@ -10,7 +10,7 @@ export class AuthenticationService {
     return hashPassword;
   };
 
-  public isPasswordValid = (hashPassword: string, password: string) => {
+  public static isPasswordValid = (hashPassword: string, password: string) => {
     const passwordField = hashPassword.split('$');
     const salt = passwordField[0];
     const hash = crypto

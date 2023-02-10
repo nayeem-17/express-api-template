@@ -11,7 +11,7 @@ const swaggerDocument = YAML.load('./swagger.yaml');
 
 import * as dotenv from 'dotenv';
 
-import limiter from './services/rateLimiter';
+import limiter from './utils/rate.limiter';
 import { IndexRouter } from './routes/index.route';
 import { AuthRouter } from './routes/auth.route';
 
