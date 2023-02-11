@@ -7,6 +7,6 @@ export class IndexController {
     this.service = new IndexService();
   }
   public helloWorld = (req: Request, res: Response) => {
-    res.status(500).json({ title: 'Express' });
+    res.status(200).json({ title: 'Express' });
   };
 }

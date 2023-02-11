@@ -15,7 +15,6 @@ export class IndexRouter {
    */
   public routes(): Router {
     this.indexRouter.get('/', this.controller.helloWorld);
-    this.indexRouter.get('/get/:id', this.controller.getManager);
     return this.indexRouter;
   }
 }

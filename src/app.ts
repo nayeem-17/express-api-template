@@ -7,13 +7,16 @@ import morgan from 'morgan';
 import cors from 'cors';
 import helmet from 'helmet';
 
-const swaggerDocument = YAML.load('./swagger.yaml');
+// const swaggerDocument = YAML.load('./swagger.yaml');
 
 import * as dotenv from 'dotenv';
 
 import limiter from './utils/rate.limiter';
 import { IndexRouter } from './routes/index.route';
 import { AuthRouter } from './routes/auth.route';
+import { SwaggerConfig } from './config/swagger.config';
+import swaggerJSDoc from 'swagger-jsdoc';
+import { UserRouter } from './routes/user.route';
 
 class App {
   public getApp() {
@@ -22,10 +25,12 @@ class App {
   private app: express.Application;
   private indexRouter: IndexRouter;
   private authRouter: AuthRouter;
+  private userRouter: UserRouter;
   constructor() {
     this.app = express();
     this.authRouter = new AuthRouter();
     this.indexRouter = new IndexRouter();
+    this.userRouter = new UserRouter();
     this.setConfig();
     this.setRoutes();
   }
@@ -41,18 +46,30 @@ class App {
     this.app.use(limiter);
   }
   private setRoutes() {
+    const options = {
+      definition: {
+        openapi: '3.0.0',
+        info: {
+          title: 'My API',
+          version: '1.0.0',
+        },
+      },
+      apis: ['../routes/*ts'],
+    };
     this.app.use(
       '/api-docs',
       swaggerUi.serve,
-      swaggerUi.setup(swaggerDocument),
+      swaggerUi.setup(swaggerJSDoc(options)),
     );
 
     this.app.use('/', this.indexRouter.routes());
     this.app.use('/auth', this.authRouter.routes());
+    this.app.use('/user', this.userRouter.routes());
+
     // catch 404 and forward to error handler
     this.app.use(function (req: Request, res: Response, next: NextFunction) {
       if (req.originalUrl === '/favicon.ico') {
-        res.status(204).json({ nope: true });
+        return res.status(204).json({ nope: true });
       }
       next(createError(404));
     });

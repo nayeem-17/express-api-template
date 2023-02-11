@@ -6,6 +6,7 @@ export class UserMapper {
     const userDto: UserDto = {
       name: user.name,
       email: user.email,
+      password: user.password,
     };
     return userDto;
   }
@@ -13,7 +14,7 @@ export class UserMapper {
     const user: User = {
       name: userDto.name,
       email: userDto.email,
-      password: '',
+      password: userDto.password,
     };
     return user;
   }

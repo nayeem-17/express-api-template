@@ -1,0 +1,22 @@
+{
+    "controllerPathGlobs": ["./src/controllers/**/*.ts"],
+    "routesDir": "./src/routes",
+    "outputDirectory": "./dist",
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "*": [
+          "*"
+        ]
+      }
+    },
+    "exclude": [
+      "**/__tests__/**"
+    ],
+    "openApi": {
+      "title": "My API",
+      "description": "A description of my API",
+      "version": "1.0.0"
+    }
+  }
+  
