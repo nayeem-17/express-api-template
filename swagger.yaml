@@ -6,13 +6,48 @@ info:
   contact:
     name: "naim"
 servers:
-  - url: http://localhost:8080
+  - url: http://localhost:3000
 paths:
   /:
     get:
       responses:
         "200":
           description: ok
+  /user:
+    get:
+      description: "Getting user data"
+      responses:
+        "200":
+          description: OK
+      tags:
+        - "user"
+    post:
+      description: "Creating new user"
+      responses:
+        "200":
+          description: OK
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: naim
+                email:
+                  type: string
+                  example: naim@gmail.com
+                password:
+                  type: string
+                  example: pass
+      tags:
+        - "user"
+security:
+  - name: []
+
+  # /user/:
 
 components:
   securitySchemes:

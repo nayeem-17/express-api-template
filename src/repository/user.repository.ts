@@ -3,8 +3,8 @@ import { User } from '../model/user';
 
 export class UserRepository {
   private prisma;
-  constructor() {
-    this.prisma = new PrismaClient();
+  constructor(prisma: PrismaClient) {
+    this.prisma = prisma;
   }
   async getUser(id: number) {
     return this.prisma.user
@@ -29,7 +29,8 @@ export class UserRepository {
         return data;
       })
       .catch((error) => {
-        throw new Error('error occurred' + error);
+        console.log('error occurred repo ' + error.message);
+        throw new Error('error occurred while creating the user');
       });
   }
   async updateUser(user: User) {

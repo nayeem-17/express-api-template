@@ -14,9 +14,8 @@ import * as dotenv from 'dotenv';
 import limiter from './utils/rate.limiter';
 import { IndexRouter } from './routes/index.route';
 import { AuthRouter } from './routes/auth.route';
-import { SwaggerConfig } from './config/swagger.config';
-import swaggerJSDoc from 'swagger-jsdoc';
 import { UserRouter } from './routes/user.route';
+import { PrismaClient } from '@prisma/client';
 
 class App {
   public getApp() {
@@ -26,11 +25,13 @@ class App {
   private indexRouter: IndexRouter;
   private authRouter: AuthRouter;
   private userRouter: UserRouter;
+  private prismaClient: PrismaClient;
   constructor() {
     this.app = express();
+    this.prismaClient = new PrismaClient();
     this.authRouter = new AuthRouter();
     this.indexRouter = new IndexRouter();
-    this.userRouter = new UserRouter();
+    this.userRouter = new UserRouter(this.prismaClient);
     this.setConfig();
     this.setRoutes();
   }
@@ -46,20 +47,12 @@ class App {
     this.app.use(limiter);
   }
   private setRoutes() {
-    const options = {
-      definition: {
-        openapi: '3.0.0',
-        info: {
-          title: 'My API',
-          version: '1.0.0',
-        },
-      },
-      apis: ['../routes/*ts'],
-    };
+    const swaggerDocument = YAML.load('./swagger.yaml');
+
     this.app.use(
       '/api-docs',
       swaggerUi.serve,
-      swaggerUi.setup(swaggerJSDoc(options)),
+      swaggerUi.setup(swaggerDocument),
     );
 
     this.app.use('/', this.indexRouter.routes());

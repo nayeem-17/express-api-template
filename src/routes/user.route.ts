@@ -1,15 +1,24 @@
 import express, { Router } from 'express';
-import { IndexController } from '../controller/index.controller';
 import { UserController } from '../controller/user.controller';
+import { PrismaClient } from '@prisma/client';
+import { UserRepository } from '../repository/user.repository';
+import { UserService } from '../service/user.service';
 
 /* GET home page. */
 
 export class UserRouter {
   private userRouter: Router;
   private controller: UserController;
-  constructor() {
+  private prismaClient: PrismaClient;
+  private service: UserService;
+  private repository: UserRepository;
+  constructor(prismaClient: PrismaClient) {
     this.userRouter = express.Router();
-    this.controller = new UserController();
+    this.prismaClient = prismaClient;
+    this.repository = new UserRepository(this.prismaClient);
+    this.service = new UserService(this.repository);
+    this.controller = new UserController(this.service);
+    // this.routes();
   }
   /**
    * routes

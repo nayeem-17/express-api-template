@@ -3,10 +3,6 @@ import { NextFunction, Response } from 'express';
 import jwt from 'jsonwebtoken';
 import { AuthenticationService } from './authentication.service';
 export class AuthenticationMiddleware {
-  private authenticationService: AuthenticationService;
-  constructor() {
-    this.authenticationService = new AuthenticationService();
-  }
   public login = async (req: any, res: any, next: NextFunction) => {
     const { username, password } = req.body;
     // Fetching userData from database
@@ -18,10 +14,7 @@ export class AuthenticationMiddleware {
 
     const { userId, email } = userInfo[0];
 
-    if (
-      hashPass &&
-      this.authenticationService.isPasswordValid(hashPass, password)
-    ) {
+    if (hashPass && AuthenticationService.isPasswordValid(hashPass, password)) {
       req.body = {
         userId: userId,
         username: username,
