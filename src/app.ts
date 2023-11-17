@@ -3,7 +3,6 @@ import express, { NextFunction, Request, Response } from 'express';
 import swaggerUi from 'swagger-ui-express';
 import YAML from 'yamljs';
 import cookieParser from 'cookie-parser';
-import morgan from 'morgan';
 import cors from 'cors';
 import helmet from 'helmet';
 
@@ -16,6 +15,7 @@ import { IndexRouter } from './routes/index.route';
 import { AuthRouter } from './routes/auth.route';
 import { UserRouter } from './routes/user.route';
 import { PrismaClient } from '@prisma/client';
+import { Logger } from './utils/logger';
 
 class App {
   public getApp() {
@@ -37,7 +37,8 @@ class App {
   }
   private setConfig() {
     dotenv.config();
-    this.app.use(morgan('dev'));
+    // if IS_EXPRESS_LOGGER is true, then add this
+    if (process.env.EXPRESS_LOGGER) this.app.use(Logger.getExpressLogger);
     this.app.use(helmet());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
